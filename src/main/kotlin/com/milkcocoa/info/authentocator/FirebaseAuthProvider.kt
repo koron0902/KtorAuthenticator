@@ -66,17 +66,15 @@ class FirebaseAuthProvider(config: FirebaseAuthProviderConfig) : AuthenticationP
         var whenReject: (suspend (ApplicationCall, Throwable) -> Unit)? = null
     }
 
-    internal class InvalidTokenException : Exception()
-
     /**
      * Firebase token is not provided
      */
-    internal class TokenNotProvidedException : Exception()
+    class TokenNotProvidedException : Exception()
 
     /**
      * Malformed 'Authorization' header. (ex. 'Authorization: xxxxxxxx.yyyyyyyy.zzzzzzzzzzzz' has no 'JWT' or 'Bearer' keyword.)
      */
-    internal class ClaimNotProvidedException : Exception()
+    class ClaimNotProvidedException : Exception()
 
     private val auth = FirebaseAuth.getInstance(config.firebaseApp ?: FirebaseApp.getInstance())
     private val authorizationType = config.authorizationType

@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.milkcocoa.info"
-version = "0.1.0"
+version = "0.1.1"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
