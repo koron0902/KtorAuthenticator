@@ -1,6 +1,9 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     kotlin("jvm") version "1.8.10"
     id("io.ktor.plugin") version "2.2.3"
+    id("maven-publish")
 }
 
 group = "com.milkcocoa.info"
@@ -16,7 +19,7 @@ application {
 
 
 dependencies {
-    api("com.google.firebase:firebase-admin:9.1.1")
+    implementation("com.google.firebase:firebase-admin:9.1.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
     testImplementation(kotlin("test"))
@@ -34,3 +37,33 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+// build.gradle.kts
+fun getProp(name: String): String? {
+    return rootProject.file("local.properties")
+        .takeIf { it.exists() }
+        ?.let { Properties().apply { load(it.reader()) }.getProperty(name) }
+        ?: System.getenv(name)
+}
+
+val GITHUB_ACCESS_TOKEN = getProp("GITHUB_ACCESS_TOKEN")
+val GITHUB_USER_NAME = getProp("GITHUB_USER_NAME")
+println(GITHUB_USER_NAME)
+println(GITHUB_ACCESS_TOKEN)
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/koron0902/KtorAuthenticator")
+            credentials {
+                username = GITHUB_USER_NAME
+                password = GITHUB_ACCESS_TOKEN
+            }
+        }
+    }
+
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["java"])
+        }
+    }
+}

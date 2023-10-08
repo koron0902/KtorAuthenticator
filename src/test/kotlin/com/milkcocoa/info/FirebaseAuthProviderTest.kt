@@ -1,6 +1,9 @@
 package com.milkcocoa.info
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.auth.oauth2.GoogleCredentials
+import com.google.firebase.FirebaseApp
+import com.google.firebase.FirebaseOptions
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -8,6 +11,7 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.testing.*
+import io.ktor.server.testing.TestApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.junit.jupiter.api.Test
@@ -18,9 +22,21 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class FirebaseAuthProviderTest{
-    val firebaseApiKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    val firebaseApiKey = "AIzaSyCzBzHbQGjlUxESaZIhXU3GFeAOBdd-G6s"
     val obtainTokenUrl =
         URL("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=$firebaseApiKey")
+
+    companion object{
+        init {
+            val firebaseJson = "/firebase-admin.json"
+            val options = FirebaseOptions.builder()
+                .setCredentials(GoogleCredentials.fromStream(TestApplication::class.java.getResourceAsStream(firebaseJson)))
+                .build()
+
+
+            FirebaseApp.initializeApp(options)
+        }
+    }
 
     private suspend fun getFirebaseAccessToken(): String{
         return withContext(Dispatchers.IO){
