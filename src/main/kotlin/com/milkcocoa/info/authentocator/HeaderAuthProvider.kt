@@ -4,6 +4,14 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.auth.*
 
 class HeaderAuthProvider(config: HeaderAuthProviderConfig) : AuthenticationProvider(config) {
+
+    /**
+     * utility data class for Header
+     */
+    data class Header(
+        val name: String,
+        val value: String
+    )
     class HeaderAuthProviderConfig(name: String?) : AuthenticationProvider.Config(name) {
         /**
          * header name
@@ -30,12 +38,12 @@ class HeaderAuthProvider(config: HeaderAuthProviderConfig) : AuthenticationProvi
     /**
      * specified header is not found on request.
      */
-    internal class HeaderNotProvidedException : Exception()
+    class HeaderNotProvidedException : Exception()
 
     /**
      * detected header value is not correct
      */
-    internal class ValidateFailedException : Exception()
+    class ValidateFailedException : Exception()
 
     private val headerName: String = config.headerName ?: ""
     private val validator = config.validate
