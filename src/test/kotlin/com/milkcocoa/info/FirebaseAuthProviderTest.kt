@@ -22,7 +22,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class FirebaseAuthProviderTest{
-    val firebaseApiKey = "AIzaSyCzBzHbQGjlUxESaZIhXU3GFeAOBdd-G6s"
+    val firebaseApiKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     val obtainTokenUrl =
         URL("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=$firebaseApiKey")
 
