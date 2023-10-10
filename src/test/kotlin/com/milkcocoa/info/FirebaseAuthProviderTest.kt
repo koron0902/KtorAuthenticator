@@ -16,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Disabled
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
@@ -66,6 +67,7 @@ class FirebaseAuthProviderTest{
 
 
     @Test
+    @Disabled("Firebaseのキーが必要なためJitPackではテストしない")
     fun testRoot() = testApplication {
         application {
             install(Authentication){
@@ -83,6 +85,7 @@ class FirebaseAuthProviderTest{
     }
 
     @Test
+    @Disabled("Firebaseのキーが必要なためJitPackではテストしない")
     fun testFirebaseWithoutToken() = testApplication {
         application {
             install(Authentication){
@@ -98,6 +101,7 @@ class FirebaseAuthProviderTest{
     }
 
     @Test
+    @Disabled("Firebaseのキーが必要なためJitPackではテストしない")
     fun testFirebaseWithJwt() = testApplication {
         application {
             install(Authentication){
@@ -122,6 +126,7 @@ class FirebaseAuthProviderTest{
 
 
     @Test
+    @Disabled("Firebaseのキーが必要なためJitPackではテストしない")
     fun testFirebaseWithMissingKeyword() = testApplication {
         application {
             install(Authentication){
@@ -150,6 +155,7 @@ class FirebaseAuthProviderTest{
     }
 
     @Test
+    @Disabled("Firebaseのキーが必要なためJitPackではテストしない")
     fun testFirebaseWithBearer() = testApplication {
         application {
             install(Authentication){
