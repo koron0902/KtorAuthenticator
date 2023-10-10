@@ -53,24 +53,24 @@ fun getProp(name: String): String? {
 
 val GITHUB_ACCESS_TOKEN = getProp("GITHUB_ACCESS_TOKEN")
 val GITHUB_USER_NAME = getProp("GITHUB_USER_NAME")
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/koron0902/KtorAuthenticator")
-            credentials {
-                username = GITHUB_USER_NAME
-                password = GITHUB_ACCESS_TOKEN
-            }
-        }
-    }
-
-    publications {
-        register<MavenPublication>("gpr") {
-            from(components["java"])
-        }
-    }
-}
+//publishing {
+//    repositories {
+//        maven {
+//            name = "GitHubPackages"
+//            url = uri("https://maven.pkg.github.com/koron0902/KtorAuthenticator")
+//            credentials {
+//                username = GITHUB_USER_NAME
+//                password = GITHUB_ACCESS_TOKEN
+//            }
+//        }
+//    }
+//
+//    publications {
+//        register<MavenPublication>("gpr") {
+//            from(components["java"])
+//        }
+//    }
+//}
 
 afterEvaluate {
     publishing {
@@ -78,8 +78,8 @@ afterEvaluate {
             // Creates a Maven publication called "release".
             register(components.first().name, MavenPublication::class){
                 from(components.first())
-                groupId = group.toString()
-                artifactId = "ktor-authenticator"
+                groupId = "com.github.koron0902"
+                artifactId = "KtorAuthenticator"
                 version = version
             }
         }
