@@ -53,8 +53,6 @@ fun getProp(name: String): String? {
 
 val GITHUB_ACCESS_TOKEN = getProp("GITHUB_ACCESS_TOKEN")
 val GITHUB_USER_NAME = getProp("GITHUB_USER_NAME")
-println(GITHUB_USER_NAME)
-println(GITHUB_ACCESS_TOKEN)
 publishing {
     repositories {
         maven {
@@ -70,6 +68,20 @@ publishing {
     publications {
         register<MavenPublication>("gpr") {
             from(components["java"])
+        }
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            register(components.first().name, MavenPublication::class){
+                from(components.first())
+                groupId = group.toString()
+                artifactId = "ktor-authenticator"
+                version = version
+            }
         }
     }
 }
