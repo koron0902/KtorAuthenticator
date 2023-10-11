@@ -1,10 +1,22 @@
 # Ktor Authenticator
+[![](https://jitpack.io/v/koron0902/KtorAuthenticator.svg)](https://jitpack.io/#koron0902/KtorAuthenticator)  
 this is a ktor plugin for more authentication schema.
 
 1. firebase authentication
 2. header authentication (like 'API_KEY', 'X_API_KEY' and more.....)
 
 # Installation
+```
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation("com.github.koron0902:KtorAuthenticator:0.1.6")
+}
+```
+
 
 # Usage
 ## Firebase Authenticate
