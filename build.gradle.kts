@@ -78,7 +78,7 @@ afterEvaluate {
             // Creates a Maven publication called "release".
             register(components.first().name, MavenPublication::class){
                 from(components.first())
-                groupId = "com.github.koron0902"
+                groupId = "com.github.milkcocoa0902"
                 artifactId = "KtorAuthenticator"
                 version = version
             }
