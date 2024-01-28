@@ -57,7 +57,7 @@ class HeaderAuthProvider(config: HeaderAuthProviderConfig) : AuthenticationProvi
         with(context.call) {
             kotlin.runCatching {
                 val headerValue = request.headers.get(headerName) ?: throw HeaderNotProvidedException()
-                val result = validator?.invoke(this, headerValue) ?: true
+                val result = validator?.invoke(this, headerValue) ?: false
 
                 if (result.not()) {
                     throw ValidateFailedException()
